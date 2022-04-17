@@ -15,7 +15,7 @@ class TopTracksController extends GetxController{
   void fetchTracks()async{
     try {
       isLoading(true);
-      var result = await TopTracksService.getTracks('long_term');
+      var result = await TopTracksService.getTracks();
       if(result!=null){
         tracks.value = result;
       }
