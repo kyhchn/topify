@@ -26,11 +26,11 @@ class TopTracksService{
     if(response.statusCode == 200){
       final data = jsonDecode(response.body);
       res = TrackRemote.fromJson(data);
-      print("fetch succes");
+      print("fetch toptracks succes");
       return res;
     }else{
       print(response.statusCode);
-      print("failed to fetcha, trying to get new token from API");
+      print("failed to fetch toptracks, trying to get new token from API");
       GetAuthenticationToken.getToken();
       return getTracks();
     }

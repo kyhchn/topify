@@ -49,73 +49,75 @@ class TopTracks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: Center(
-        child: Obx(() {
-          if (topTracksController.isLoading.value) {
-            return CircularProgressIndicator();
-          } else {
-            return RefreshIndicator(
-              onRefresh: refresh,
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: 200,
-                      width: 100,
-                      child: Row(
-                        children: [
-                          Image(
-                              image: NetworkImage(topTracksController
-                                  .tracks.value.items!
-                                  .elementAt(index)
-                                  .album!
-                                  .images!
-                                  .elementAt(0)
-                                  .url!)),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width / 2 - 50,
-                                child: Text(
-                                  "Title: " +
-                                      topTracksController.tracks.value.items!
-                                          .elementAt(index)
-                                          .name!,
-                                  softWrap: true,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2 - 50,
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Center(
+          child: Obx(() {
+            if (topTracksController.isLoading.value) {
+              return CircularProgressIndicator();
+            } else {
+              return RefreshIndicator(
+                onRefresh: refresh,
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 200,
+                        width: 100,
+                        child: Row(
+                          children: [
+                            Image(
+                                image: NetworkImage(topTracksController
+                                    .tracks.value.items!
+                                    .elementAt(index)
+                                    .album!
+                                    .images!
+                                    .elementAt(0)
+                                    .url!)),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2 - 50,
                                   child: Text(
-                                    "Artist: " + getArtist(index),
+                                    "Title: " +
+                                        topTracksController.tracks.value.items!
+                                            .elementAt(index)
+                                            .name!,
                                     softWrap: true,
-                                  ))
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: 10,
-                    );
-                  },
-                  itemCount: topTracksController.tracks.value.limit),
-            );
-          }
-        }),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 - 50,
+                                    child: Text(
+                                      "Artist: " + getArtist(index),
+                                      softWrap: true,
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 10,
+                      );
+                    },
+                    itemCount: topTracksController.tracks.value.limit),
+              );
+            }
+          }),
+        ),
       ),
     );
   }

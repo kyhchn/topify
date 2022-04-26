@@ -13,6 +13,7 @@ class UserProfileService {
     if (token == null) {
       GetAuthenticationToken.getToken();
       token = await GetStorage().read('token');
+      
     }
     final response = await http.get(
       Uri.parse(profileUrl),

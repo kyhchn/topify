@@ -17,6 +17,7 @@ class ProfileController extends GetxController{
       var result =  await UserProfileService.getUserProfile();
       if(result!=null){
         profile.value = result;
+        print('fetch profile success');
       }
     } catch (e) {
       print(e.toString());

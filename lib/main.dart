@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:topify/views/loginpage.dart';
 import 'package:topify/views/toptracks.dart';
 import 'package:topify/views/userprofile.dart';
 Future<void> main() async {
@@ -14,17 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: 'WorkSans',
-        primaryColor: Colors.white,
+        fontFamily: 'Gotham',
+        canvasColor: Colors.pink.shade50,
+        backgroundColor: Colors.pink.shade100,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.green
+        primarySwatch: Colors.red,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Topify'),
-          backgroundColor: Colors.green,
-        ),
-        body: TopTracks(),
+
+        body: LoginPage(),
       ),
     );
   }
