@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Gotham',
-        canvasColor: Colors.pink.shade50,
+        canvasColor: Colors.red.shade100,
         backgroundColor: Colors.pink.shade100,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.purple,
       ),
       home: Scaffold(
 

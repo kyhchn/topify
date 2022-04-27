@@ -19,11 +19,13 @@ class Dashboard extends StatelessWidget {
     playlistController.onInit();
     await Future.delayed(Duration(seconds: 2));
     while (topTracksController.isLoading.value ||
-        profileController.isLoading.value|| playlistController.isLoading.value)  {
+        profileController.isLoading.value ||
+        playlistController.isLoading.value) {
       await Future.delayed(Duration(seconds: 1));
     }
   }
 
+  int _index = 0;
   String getArtist(int index) {
     String name = "";
     for (int i = 0;
@@ -59,6 +61,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Text("Dashboard"),
       ),
@@ -66,81 +69,88 @@ class Dashboard extends StatelessWidget {
         child: Center(
           child: Obx(() {
             if (topTracksController.isLoading.value ||
-                profileController.isLoading.value|| playlistController.isLoading.value) {
+                profileController.isLoading.value ||
+                playlistController.isLoading.value) {
               return CircularProgressIndicator();
             } else {
               return RefreshIndicator(
                 onRefresh: refresh,
                 child: Padding(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: ListView(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25))),
-                            height: MediaQuery.of(context).size.height * 0.4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CircleAvatar(
-                                  radius: 70,
-                                  backgroundImage: NetworkImage(
-                                      profileController.profile.value.images!
-                                          .elementAt(0)
-                                          .url!),
-                                ),
-                                Text(
-                                  profileController.profile.value.displayName!,
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 28),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          profileController
-                                              .profile.value.country!,
-                                          style: TextStyle(
-                                              color: Colors.red, fontSize: 22),
-                                        ),
-                                        Text("country")
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          profileController
-                                              .profile.value.followers!.total!
-                                              .toString(),
-                                          style: TextStyle(
-                                              color: Colors.red, fontSize: 22),
-                                        ),
-                                        Text("followers")
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          playlistController.Playlist.value.items!.length.toString(),
-                                          style: TextStyle(
-                                              color: Colors.red, fontSize: 22),
-                                        ),
-                                        Text("Playlist")
-                                      ],
-                                    )
-                                  ],
-                                )
-                              ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              height: MediaQuery.of(context).size.height * 0.4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 70,
+                                    backgroundImage: NetworkImage(
+                                        profileController.profile.value.images!
+                                            .elementAt(0)
+                                            .url!),
+                                  ),
+                                  Text(
+                                    profileController.profile.value.displayName!,
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            profileController
+                                                .profile.value.country!,
+                                            style: TextStyle(
+                                                color: Colors.red, fontSize: 22),
+                                          ),
+                                          Text("country")
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            profileController
+                                                .profile.value.followers!.total!
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: Colors.red, fontSize: 22),
+                                          ),
+                                          Text("followers")
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            playlistController
+                                                .Playlist.value.items!.length
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: Colors.red, fontSize: 22),
+                                          ),
+                                          Text("Playlist")
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           Container(
@@ -204,14 +214,28 @@ class Dashboard extends StatelessWidget {
                                             width: 30,
                                           ),
                                           Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Text(topTracksController
-                                                  .tracks.value.items!
-                                                  .elementAt(index)
-                                                  .name!, style: TextStyle(color: Colors.red),),
-                                              Container(child: Text(getArtist(index), softWrap: true,textAlign: TextAlign.justify,style: TextStyle(color: Colors.black),),)
+                                              Text(
+                                                topTracksController
+                                                    .tracks.value.items!
+                                                    .elementAt(index)
+                                                    .name!,
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              Container(
+                                                child: Text(
+                                                  getArtist(index),
+                                                  softWrap: true,
+                                                  textAlign: TextAlign.justify,
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                              )
                                             ],
                                           )
                                         ],
