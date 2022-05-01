@@ -4,10 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:slider_button/slider_button.dart';
+import 'package:topify/assets/colors.dart';
 import 'package:topify/commons/myprofile.dart';
 import 'package:topify/services/getauthenticationtoken.dart';
 import 'package:topify/views/dashboard.dart';
-import 'package:topify/views/toptracks.dart';
 import "package:flutter_feather_icons/flutter_feather_icons.dart";
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                       child: Text(
                     "Topify",
                     style: TextStyle(
-                        color: Colors.red,
+                        color: pastelBrown,
                         fontWeight: FontWeight.bold,
                         fontSize: 60),
                   )),
@@ -56,14 +56,21 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 100,),
+              Image(
+                image: AssetImage('lib/assets/images/boi.gif'),
+              ),
               Center(
                 child: SliderButton(
-                  action: () async {
-                    GetAuthenticationToken.getToken();
-                    if (await box.read('token') != null)
-                      Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (builder)=>Dashboard()), (route) => false);
-                    else {
+                  backgroundColor: pastelGrey,
+                  action: ()async{
+                    await GetAuthenticationToken.getToken();
+                    if (box.read('token') != null){
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (builder) => Dashboard(0)),
+                          (route) => false);
+                    } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
                               "Login failed, make sure spotify have been installed on your phone")));
@@ -74,19 +81,21 @@ class LoginPage extends StatelessWidget {
                     }
                   },
                   vibrationFlag: true,
-                  highlightedColor: Colors.red,
-                  buttonColor: Colors.pink.shade100,
+                  highlightedColor: Colors.white,
+                  buttonColor: pastelBrown,
                   shimmer: true,
                   label: Text(
                     "Slide to login",
                     style: TextStyle(
-                        color: Color(0xff4a4a4a),
+                        color: armyGreen,
                         fontWeight: FontWeight.w500,
                         fontSize: 17),
+                    textAlign: TextAlign.start,
                   ),
                   icon: Icon(
                     FeatherIcons.logIn,
-                    color: Colors.red,
+                    color: pastelCream,
+                    size: 35,
                   ),
                 ),
               ),
@@ -99,7 +108,10 @@ class LoginPage extends StatelessWidget {
                           onPressed: () async {
                             externalLink(instagram);
                           },
-                          icon: Icon(FeatherIcons.instagram)),
+                          icon: Icon(
+                            FeatherIcons.instagram,
+                            color: pastelBrown,
+                          )),
                       IconButton(
                           onPressed: () async {
                             externalLink(linkedin);
@@ -109,7 +121,10 @@ class LoginPage extends StatelessWidget {
                           onPressed: () async {
                             externalLink(github);
                           },
-                          icon: Icon(FeatherIcons.github)),
+                          icon: Icon(
+                            FeatherIcons.github,
+                            color: pastelBrown,
+                          )),
                     ],
                   ),
                   Text("Made with love <3 by kyhchn"),

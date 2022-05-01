@@ -1,29 +1,30 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:topify/assets/colors.dart';
+import 'package:topify/views/dashboard.dart';
 import 'package:topify/views/loginpage.dart';
-import 'package:topify/views/toptracks.dart';
-import 'package:topify/views/userprofile.dart';
 Future<void> main() async {
   await GetStorage.init();
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        iconTheme: IconThemeData(
+          color: pastelBrown
+        ),
         fontFamily: 'Gotham',
-        canvasColor: Colors.red.shade100,
-        backgroundColor: Colors.pink.shade100,
+        canvasColor: pastelCream,
+        backgroundColor: pastelGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.purple,
+        primarySwatch: pastelBrown,
       ),
       home: Scaffold(
-
-        body: LoginPage(),
+        body: GetStorage().read('login')==null?LoginPage():GetStorage().read('login')?Dashboard(0):LoginPage(),
       ),
     );
   }

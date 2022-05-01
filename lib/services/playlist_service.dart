@@ -28,6 +28,7 @@ class PlaylistService {
     } else {
       print(response.statusCode);
       print('failed to fetch playlist, try to get new token from API');
+      GetAuthenticationToken.getAuthenticationToken();
       return getProfile();
     }
   }

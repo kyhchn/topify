@@ -22,10 +22,11 @@ class GetAuthenticationToken {
     }
   }
 
-  static void getToken() async {
+  static Future <void> getToken() async {
     final box = GetStorage();
     String result = await GetAuthenticationToken.getAuthenticationToken();
     await box.write('token', result);
     print("token is " + result);
+    await box.write('login', true);
   }
 }
