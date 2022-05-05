@@ -11,9 +11,8 @@ class UserProfileService {
   static Future<ProfileRemote?> getUserProfile() async {
     var token = await GetStorage().read('token');
     if (token == null) {
-      GetAuthenticationToken.getToken();
+      await GetAuthenticationToken.getToken();
       token = await GetStorage().read('token');
-      
     }
     final response = await http.get(
       Uri.parse(profileUrl),
@@ -32,8 +31,8 @@ class UserProfileService {
     }else{
       print(response.statusCode);
       print("failed to fetch profile, trying to get new token");
-      GetAuthenticationToken.getToken();
-      return getUserProfile();
+      await GetAuthenticationToken.getToken();
+      return await getUserProfile();
     }
   }
 }

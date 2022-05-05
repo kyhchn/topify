@@ -12,10 +12,9 @@ class GetAuthenticationToken {
               'playlist-read-private, '
               'user-read-private, '
               'user-read-email, '
-              'user-top-read');
+              'user-top-read, ''user-read-playback-position');
       print('succes get token');
       return authenticationToken;
-
     } catch (e) {
       print(e.toString());
       return "failed to get token";

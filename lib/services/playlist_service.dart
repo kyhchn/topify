@@ -11,12 +11,12 @@ class PlaylistService {
   static Future<PlaylistRemote?> getProfile() async {
     var token = await GetStorage().read('token');
     if (token == null) {
-      GetAuthenticationToken.getAuthenticationToken();
+      await GetAuthenticationToken.getAuthenticationToken();
       token = await GetStorage().read('token');
     }
     final response = await http.get(Uri.parse(playlistUrl), headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
     PlaylistRemote res;
@@ -28,8 +28,8 @@ class PlaylistService {
     } else {
       print(response.statusCode);
       print('failed to fetch playlist, try to get new token from API');
-      GetAuthenticationToken.getAuthenticationToken();
-      return getProfile();
+      await GetAuthenticationToken.getToken();
+      return await getProfile();
     }
   }
 }

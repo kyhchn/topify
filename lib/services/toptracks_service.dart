@@ -11,7 +11,7 @@ class TopTracksService{
   static Future<TrackRemote?> getTracks()async{
     var token = await GetStorage().read('token');
     if(token==null){
-      GetAuthenticationToken.getToken();
+      await GetAuthenticationToken.getToken();
       token = await GetStorage().read('token');
     }
     final response = await http.get(
@@ -31,8 +31,8 @@ class TopTracksService{
     }else{
       print(response.statusCode);
       print("failed to fetch toptracks, trying to get new token from API");
-      GetAuthenticationToken.getToken();
-      return getTracks();
+      await GetAuthenticationToken.getToken();
+      return await getTracks();
     }
   }
 }
