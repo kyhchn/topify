@@ -80,14 +80,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Obx(() {
-        if (topTracksController.isLoading.value ||
-            profileController.isLoading.value ||
-            playlistController.isLoading.value) {
-          return CircularProgressIndicator();
-        } else {
-          return RefreshIndicator(
+    return Obx(() {
+      if (topTracksController.isLoading.value ||
+          profileController.isLoading.value ||
+          playlistController.isLoading.value) {
+        return Center(child: CircularProgressIndicator());
+      } else {
+        return Center(
+          child: RefreshIndicator(
             onRefresh: refresh,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -264,9 +264,9 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        }
-      }),
-    );
+          ),
+        );
+      }
+    });
   }
 }
