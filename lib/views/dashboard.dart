@@ -18,7 +18,6 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
           bottomNavigationBar: FlashyTabBar(
             items: [
-              navbarItem(Icon(Icons.home), "Home Page"),
               navbarItem(Icon(CupertinoIcons.music_albums ), "Top Tracks"),
               navbarItem(Icon(CupertinoIcons.power), "Log Out")
             ],
@@ -33,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
           body: SafeArea(
             child: IndexedStack(
               index: widget._index,
-              children: [HomePage(), TopTracks(), LogOutPage()],
+              children: [TopTracks(), LogOutPage()],
             ),
           ),
         );

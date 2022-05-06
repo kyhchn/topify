@@ -7,12 +7,7 @@ class GetAuthenticationToken {
       var authenticationToken = await SpotifySdk.getAuthenticationToken(
           clientId: 'da657fe9b18340c29c714b81763fcb00',
           redirectUrl: 'topify-login://callback',
-          scope: 'app-remote-control, '
-              'user-modify-playback-state, '
-              'playlist-read-private, '
-              'user-read-private, '
-              'user-read-email, '
-              'user-top-read, ''user-read-playback-position');
+          scope: 'user-top-read');
       print('succes get token');
       return authenticationToken;
     } catch (e) {
