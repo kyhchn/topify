@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:topify/views/dashboard.dart';
 import 'package:topify/views/loginpage.dart';
-import 'package:topify/views/widgets/homepage.dart';
+import 'package:topify/views/widgets/toptracks.dart';
 import 'package:vibration/vibration.dart';
 
 class LogOutPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class LogOutPage extends StatelessWidget {
         TextButton(
           onPressed: () {
             Vibration.vibrate(duration: 500, amplitude: 128);
-            HomePage.dispose();
+            TopTracks.dispose();
             GetStorage().erase();
             Navigator.pushAndRemoveUntil(
               context,

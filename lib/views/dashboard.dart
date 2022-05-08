@@ -1,9 +1,7 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:topify/assets/colors.dart';
-import 'package:topify/views/widgets/HomePage.dart';
 import 'package:topify/views/widgets/logoutpage.dart';
 import 'package:topify/views/widgets/toptracks.dart';
 

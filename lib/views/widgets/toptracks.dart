@@ -1,35 +1,39 @@
 import 'package:auto_animated/auto_animated.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topify/assets/colors.dart';
 import 'package:topify/controllers/toptrackscontroller.dart';
-import 'package:topify/views/widgets/homepage.dart';
 
 class TopTracks extends StatelessWidget {
+  static final TopTracksController topTracksController =
+      Get.put(TopTracksController());
+  static void dispose() {
+    topTracksController.onClose();
+  }
+
   String getArtist(int index) {
     String name = "";
     for (int i = 0;
         i <
-            HomePage.topTracksController.tracks.value.items!
+            topTracksController.tracks.value.items!
                 .elementAt(index)
                 .artists!
                 .length;
         i++) {
-      if (HomePage.topTracksController.tracks.value.items!
+      if (topTracksController.tracks.value.items!
                   .elementAt(index)
                   .artists!
                   .length -
               1 !=
           i) {
-        name += HomePage.topTracksController.tracks.value.items!
+        name += topTracksController.tracks.value.items!
                 .elementAt(index)
                 .artists!
                 .elementAt(i)
                 .name! +
             ", ";
       } else {
-        name += HomePage.topTracksController.tracks.value.items!
+        name += topTracksController.tracks.value.items!
             .elementAt(index)
             .artists!
             .elementAt(i)
@@ -43,14 +47,14 @@ class TopTracks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Center(
-        child: HomePage.topTracksController.isLoading.value
+        child: topTracksController.isLoading.value
             ? CircularProgressIndicator()
             : RefreshIndicator(
                 onRefresh: () async {
-                  HomePage.topTracksController.onClose();
-                  HomePage.topTracksController.onInit();
+                  topTracksController.onClose();
+                  topTracksController.onInit();
                   await Future.delayed(Duration(seconds: 2));
-                  while (HomePage.topTracksController.isLoading.value) {
+                  while (topTracksController.isLoading.value) {
                     await Future.delayed(Duration(seconds: 1));
                   }
                 },
@@ -99,87 +103,103 @@ class TopTracks extends StatelessWidget {
                                 // Paste you Widget
                                 child: Column(
                                   children: [
-                                    SizedBox(height: 20,),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12),
                                       child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Text((index+1).toString(), style: TextStyle(fontSize: 20),),
-                                                SizedBox(width: 20,),
-                                                Container(
-                                                  width: 60,
-                                                  height: 60,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(20),
-                                                      image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              HomePage.topTracksController
-                                                                  .tracks.value.items!
-                                                                  .elementAt(index)
-                                                                  .album!
-                                                                  .images!
-                                                                  .elementAt(0)
-                                                                  .url!))),
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        child: Text(
-                                                          HomePage.topTracksController
-                                                              .tracks.value.items!
-                                                              .elementAt(index)
-                                                              .name!,
-                                                              softWrap: true,
-                                                              textAlign: TextAlign.justify,
-                                                          style:
-                                                              TextStyle(color: armyGreen),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        child: Text(
-                                                          getArtist(index),
-                                                          softWrap: false,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          textAlign: TextAlign.justify,
-                                                          style: TextStyle(
-                                                              color: Colors.black),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(width: 20,)
-                                              ],
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              width: 20,
                                             ),
-                                            height: 80,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                          ),
+                                            Text(
+                                              (index + 1).toString(),
+                                              style: TextStyle(fontSize: 20),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              width: 60,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          topTracksController
+                                                              .tracks
+                                                              .value
+                                                              .items!
+                                                              .elementAt(index)
+                                                              .album!
+                                                              .images!
+                                                              .elementAt(0)
+                                                              .url!))),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    child: Text(
+                                                      topTracksController
+                                                          .tracks.value.items!
+                                                          .elementAt(index)
+                                                          .name!,
+                                                      softWrap: true,
+                                                      textAlign:
+                                                          TextAlign.justify,
+                                                      style: TextStyle(
+                                                          color: armyGreen),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Text(
+                                                      getArtist(index),
+                                                      softWrap: false,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      textAlign:
+                                                          TextAlign.justify,
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            )
+                                          ],
+                                        ),
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                        itemCount: HomePage.topTracksController.tracks.value.items!.length,
+                        itemCount:
+                            topTracksController.tracks.value.items!.length,
                         controller: ScrollController())
                   ],
                 ),
