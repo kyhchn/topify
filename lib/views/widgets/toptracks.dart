@@ -210,12 +210,12 @@ class TopTracks extends StatelessWidget {
 
   final options = LiveOptions(
     // Start animation after (default zero)
-    delay: Duration(milliseconds: 100),
+    delay: Duration(milliseconds: 5),
     // Show each item through (default 250)
-    showItemInterval: Duration(milliseconds: 150),
+    showItemInterval: Duration(milliseconds: 50),
 
     // Animation duration (default 250)
-    showItemDuration: Duration(milliseconds: 200),
+    showItemDuration: Duration(milliseconds: 100),
 
     // Animations starts at 0.05 visible
     // item fraction in sight (default 0.025)
@@ -224,6 +224,6 @@ class TopTracks extends StatelessWidget {
     // Repeat the animation of the appearance
     // when scrolling in the opposite direction (default false)
     // To get the effect as in a showcase for ListView, set true
-    reAnimateOnVisibility: true,
+    reAnimateOnVisibility: false,
   );
 }
