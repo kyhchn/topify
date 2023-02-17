@@ -48,14 +48,14 @@ class TopTracks extends StatelessWidget {
     return Obx(
       () => Center(
         child: topTracksController.isLoading.value
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : RefreshIndicator(
                 onRefresh: () async {
                   topTracksController.onClose();
                   topTracksController.onInit();
-                  await Future.delayed(Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 2));
                   while (topTracksController.isLoading.value) {
-                    await Future.delayed(Duration(seconds: 1));
+                    await Future.delayed(const Duration(seconds: 1));
                   }
                 },
                 child: CustomScrollView(
@@ -97,13 +97,13 @@ class TopTracks extends StatelessWidget {
                               // And slide transition
                               child: SlideTransition(
                                 position: Tween<Offset>(
-                                  begin: Offset(0, -0.1),
+                                  begin: const Offset(0, -0.1),
                                   end: Offset.zero,
                                 ).animate(animation),
                                 // Paste you Widget
                                 child: Column(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                     Padding(
@@ -116,14 +116,15 @@ class TopTracks extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Text(
                                               (index + 1).toString(),
-                                              style: TextStyle(fontSize: 20),
+                                              style:
+                                                  const TextStyle(fontSize: 20),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Container(
@@ -144,7 +145,7 @@ class TopTracks extends StatelessWidget {
                                                               .elementAt(0)
                                                               .url!))),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Expanded(
@@ -175,14 +176,14 @@ class TopTracks extends StatelessWidget {
                                                           TextOverflow.ellipsis,
                                                       textAlign:
                                                           TextAlign.justify,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: Colors.black),
                                                     ),
                                                   )
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             )
                                           ],
@@ -208,7 +209,7 @@ class TopTracks extends StatelessWidget {
     );
   }
 
-  final options = LiveOptions(
+  final options = const LiveOptions(
     // Start animation after (default zero)
     delay: Duration(milliseconds: 5),
     // Show each item through (default 250)

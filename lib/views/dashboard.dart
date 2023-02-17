@@ -10,32 +10,34 @@ class Dashboard extends StatefulWidget {
   int _index = 0;
   State<Dashboard> createState() => _DashboardState();
 }
+
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          bottomNavigationBar: FlashyTabBar(
-            items: [
-              navbarItem(Icon(CupertinoIcons.music_albums ), "Top Tracks"),
-              navbarItem(Icon(CupertinoIcons.power), "Log Out")
-            ],
-            onItemSelected: (index){
-              setState(() {
-                widget._index = index;
-              });
-            },
-            selectedIndex: widget._index,
-          ),
-          
-          body: SafeArea(
-            child: IndexedStack(
-              index: widget._index,
-              children: [TopTracks(), LogOutPage()],
-            ),
-          ),
-        );
+      bottomNavigationBar: FlashyTabBar(
+        items: [
+          navbarItem(const Icon(CupertinoIcons.music_albums), "Top Tracks"),
+          navbarItem(const Icon(CupertinoIcons.power), "Log Out")
+        ],
+        onItemSelected: (index) {
+          setState(() {
+            widget._index = index;
+          });
+        },
+        selectedIndex: widget._index,
+      ),
+      body: SafeArea(
+        child: IndexedStack(
+          index: widget._index,
+          children: [TopTracks(), const LogOutPage()],
+        ),
+      ),
+    );
   }
-  navbarItem(Icon icon, String tittle){
-    return FlashyTabBarItem(icon: icon, title: Text(tittle), activeColor: pastelBrown);
+
+  navbarItem(Icon icon, String tittle) {
+    return FlashyTabBarItem(
+        icon: icon, title: Text(tittle), activeColor: pastelBrown);
   }
 }
